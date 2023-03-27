@@ -1,6 +1,6 @@
 import random
-p = 17
-def gen(n = 4):
+p = 101
+def gen(n = 10):
     eqs = []
     for i in range(2*n):
         res = ""
@@ -12,10 +12,11 @@ def gen(n = 4):
                 res += ("=="+str(random.randint(0, p)))
             else:
                 res += ("==0")
-        eqs.append(f"({res}, 1)")
-    print("[")
+        #eqs.append(f"({res}, 1)")
+        eqs.append(f"{res}")
+    #print("[")
     for i in eqs:
-        print(i, end=",\n")
-    print("]")
+        print(i, end="\n")
+    #print("]")
 
 gen()
