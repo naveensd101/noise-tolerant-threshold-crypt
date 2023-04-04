@@ -1,5 +1,5 @@
 import random
-p = 101
+p = 997
 def gen(n = 10):
     eqs = []
     for i in range(2*n):
@@ -19,4 +19,4 @@ def gen(n = 10):
         print(i, end="\n")
     #print("]")
 
-gen()
+gen(20)
