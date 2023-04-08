@@ -1,5 +1,4 @@
-# TODO
+# Anonymous Threshold Cryptography
 
-- [] add doc for `equation.py`
-- [] try adding array for variables in `main.py`
-- [] test limits for `main.py`
+ - `equation_new.py` creates the source code for our lp problem
+ - put the output into a file and run it as a python file

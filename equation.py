@@ -1,4 +1,5 @@
 import random
+import numpy as np
 p = 997
 def gen(n = 10):
     eqs = []
@@ -19,4 +20,4 @@ def gen(n = 10):
         print(i, end="\n")
     #print("]")
 
-gen(20)
+

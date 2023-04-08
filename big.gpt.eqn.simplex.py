@@ -7,26 +7,26 @@ import glpk
 Lp_prob = p.LpProblem('Problem', p.LpMinimize)
 
 # Create problem Variables
-x0 = p.LpVariable("x0")
-x1 = p.LpVariable("x1")
-x2 = p.LpVariable("x2")
-x3 = p.LpVariable("x3")
-x4 = p.LpVariable("x4")
-x5 = p.LpVariable("x5")
-x7 = p.LpVariable("x7")
-x6 = p.LpVariable("x6")
-x8 = p.LpVariable("x8")
-x9 = p.LpVariable("x9")
-x10 = p.LpVariable("x10")
-x11 = p.LpVariable("x11")
-x12 = p.LpVariable("x12")
-x13 = p.LpVariable("x13")
-x14 = p.LpVariable("x14")
-x15 = p.LpVariable("x15")
-x16 = p.LpVariable("x16")
-x17 = p.LpVariable("x17")
-x18 = p.LpVariable("x18")
-x19 = p.LpVariable("x19")
+x0 = p.LpVariable("x0", cat = p.LpInteger)
+x1 = p.LpVariable("x1", cat = p.LpInteger)
+x2 = p.LpVariable("x2", cat = p.LpInteger)
+x3 = p.LpVariable("x3", cat = p.LpInteger)
+x4 = p.LpVariable("x4", cat = p.LpInteger)
+x5 = p.LpVariable("x5", cat = p.LpInteger)
+x7 = p.LpVariable("x7", cat = p.LpInteger)
+x6 = p.LpVariable("x6", cat = p.LpInteger)
+x8 = p.LpVariable("x8", cat = p.LpInteger)
+x9 = p.LpVariable("x9", cat = p.LpInteger)
+x10 = p.LpVariable("x10", cat = p.LpInteger)
+x11 = p.LpVariable("x11", cat = p.LpInteger)
+x12 = p.LpVariable("x12", cat = p.LpInteger)
+x13 = p.LpVariable("x13", cat = p.LpInteger)
+x14 = p.LpVariable("x14", cat = p.LpInteger)
+x15 = p.LpVariable("x15", cat = p.LpInteger)
+x16 = p.LpVariable("x16", cat = p.LpInteger)
+x17 = p.LpVariable("x17", cat = p.LpInteger)
+x18 = p.LpVariable("x18", cat = p.LpInteger)
+x19 = p.LpVariable("x19", cat = p.LpInteger)
 
 z0 = p.LpVariable("z0", cat = p.LpBinary)
 z1 = p.LpVariable("z1", cat = p.LpBinary)
@@ -160,11 +160,11 @@ Lp_prob += 1.03660708256581998*x0 + 0.05659058573565107*x1 + 0.17640263760198413
 # Display the problem
 print(Lp_prob)
 
-# solver = p.PULP_CBC_CMD(threads=16)   
-solver = p.GUROBI()
+solver = p.PULP_CBC_CMD(threads=16)
+#solver = p.GUROBI()
 try:
-    #status = Lp_prob.solve(solver) # Solver
-    status  = Lp_prob.solve(p.GLPK(msg = True))
+    status = Lp_prob.solve(solver) # Solver
+    #status  = Lp_prob.solve(p.GLPK(msg = True))
     print(p.LpStatus[status]) # The solution status
 
     # Printing the final solution

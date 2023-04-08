@@ -89,7 +89,8 @@ print(Lp_prob)
 
 solver = p.PULP_CBC_CMD(threads=16)
 
-status = Lp_prob.solve(p.GLPK()) # Solver
+#status = Lp_prob.solve(p.GLPK()) # Solver
+status = Lp_prob.solve(solver)
 
 print(p.LpStatus[status]) # The solution status
 
