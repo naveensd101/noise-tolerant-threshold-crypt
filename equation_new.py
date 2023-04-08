@@ -51,19 +51,20 @@ def hyperplanes(n, m, l, point, limit=100):
         coefficients.append(-1*const)
         correct_lines.append(coefficients)
 
+    print("bigM = 10000")
     # Print the correct lines
     print(f"# {m} correct equations passing through {point}")
     for i in range(m):
         print("Lp_prob += ", end="")
         for j in range(n):
             print(f"{correct_lines[i][j]}*x{j} + ", end="")
-        print(f"{correct_lines[i][n]} >= -1000*z{i}")
+        print(f"{correct_lines[i][n]} >= -1*bigM*z{i}")
     print("#------------------")
     for i in range(m):
         print("Lp_prob += ", end="")
         for j in range(n):
             print(f"{correct_lines[i][j]}*x{j} + ", end="")
-        print(f"{correct_lines[i][n]} <= 1000*z{i}")
+        print(f"{correct_lines[i][n]} <= bigM*z{i}")
 
     wrong_lines = []
     for _ in range(l):
@@ -84,13 +85,13 @@ def hyperplanes(n, m, l, point, limit=100):
         print("Lp_prob += ", end="")
         for j in range(n):
             print(f"{wrong_lines[i][j]}*x{j} + ", end="")
-        print(f"{wrong_lines[i][n]} >= -1000*z{i+m}")
+        print(f"{wrong_lines[i][n]} >= -1*bigM*z{i+m}")
     print("#------------------")
     for i in range(l):
         print("Lp_prob += ", end="")
         for j in range(n):
             print(f"{wrong_lines[i][j]}*x{j} + ", end="")
-        print(f"{wrong_lines[i][n]} <= 1000*z{i+m}")
+        print(f"{wrong_lines[i][n]} <= bigM*z{i+m}")
     print("#------------------")
     print("#------------------")
     postcode(n, m, l)
