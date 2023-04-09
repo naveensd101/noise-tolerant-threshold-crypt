@@ -1,6 +1,5 @@
 # import the library pulp as p
 import pulp as p
-import orloge
 
 # Create a LP Minimization problem
 Lp_prob = p.LpProblem('Problem', p.LpMinimize)

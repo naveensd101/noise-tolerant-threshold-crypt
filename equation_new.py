@@ -1,8 +1,8 @@
 import random
+
 def precode(n, m, l, upper):
     print("# import the library pulp as p")
     print("import pulp as p")
-    print("import orloge")
     print()
     print("# Create a LP Minimization problem")
     print("Lp_prob = p.LpProblem('Problem', p.LpMinimize)")
