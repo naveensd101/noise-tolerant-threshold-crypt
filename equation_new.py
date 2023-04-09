@@ -1,4 +1,5 @@
 import random
+import sys
 
 def precode(n, m, l, upper):
     print("# import the library pulp as p")
@@ -34,10 +35,12 @@ def hyperplanes(n, m, l, point, upper):
     input2: m, Number of equations you need which pass through point
     input3: l, Number of equations you need which doesn't have to pass through point
     input4: point, point through which equation should pass
+    input5: upper, upper bound on the value of variable
 
-    output1: m hyperplanes
-    output2: l hyperplanes
+    output: Print the whole source code for LP problem
     """
+    for i in range(n):
+        print(f"x{i} = {point[i]}", file=sys.stderr)
     precode(n, m, l, upper)
     correct_lines = []
     # For the m correct lines i will generate a list with n-1 random numbers
@@ -102,15 +105,16 @@ input1: n, Number of variables in the equation
 input2: m, Number of equations you need which pass through point
 input3: l, Number of equations you need which doesn't have to pass through point
 input4: point, point through which equation should pass
+input5: upper, upper bound on the value of variable
 
-output1: m hyperplanes
-output2: l hyperplanes
+output: Print the whole source code for LP problem
 """
 
 UPPER_BOUND_ON_VARS = 200
-NO_OF_VARS = 150
-NO_OF_CORRECT_EQNS = 151
-NO_OF_WRONG_EQNS = 149
+NO_OF_VARS = 100
+NO_OF_CORRECT_EQNS = 101
+NO_OF_WRONG_EQNS = 51
 
 POINT = [random.randint(0, UPPER_BOUND_ON_VARS) for _ in range(NO_OF_VARS)]
+#POINT = [random.random() for _ in range(NO_OF_VARS)]
 hyperplanes(NO_OF_VARS, NO_OF_CORRECT_EQNS, NO_OF_WRONG_EQNS, POINT, UPPER_BOUND_ON_VARS)
