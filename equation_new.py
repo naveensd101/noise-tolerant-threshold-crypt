@@ -21,7 +21,7 @@ def precode(n, m, l, upper):
         print(f" z{i} +", end="")
     print(f" z{m+l-1}")
     print()
-def postcode(n, m, l):
+def postcode(n, m, l, point):
     print("solver = p.PULP_CBC_CMD(threads=16, timeLimit=60)")
     print("status = Lp_prob.solve(solver) # Solver")
     print("print(p.value(Lp_prob.objective))")
@@ -29,13 +29,19 @@ def postcode(n, m, l):
     print("# Printing x values")
     for i in range(n):
         print(f"print(\"x{i} = \", p.value(x{i}))")
-def hyperplanes(n, m, l, point, upper):
+    print("# Finding the diff")
+    for i in range(n):
+        print("print(", end="")
+        print(f"p.value(x{i})", " - ", point[i], end="")
+        print(")")
+def hyperplanes(n, m, l, point, upper, bigm):
     """
     input1: n, Number of variables in the equation
     input2: m, Number of equations you need which pass through point
     input3: l, Number of equations you need which doesn't have to pass through point
     input4: point, point through which equation should pass
     input5: upper, upper bound on the value of variable
+    input6: bigm, big m value used in eqns
 
     output: Print the whole source code for LP problem
     """
@@ -53,7 +59,7 @@ def hyperplanes(n, m, l, point, upper):
         coefficients.append(-1*const)
         correct_lines.append(coefficients)
 
-    print("bigM = 10000")
+    print(f"bigM = {bigm}")
     # Print the correct lines
     print(f"# {m} correct equations passing through {point}")
     for i in range(m):
@@ -96,7 +102,7 @@ def hyperplanes(n, m, l, point, upper):
         print(f"{wrong_lines[i][n]} <= bigM*z{i+m}")
     print("#------------------")
     print("#------------------")
-    postcode(n, m, l)
+    postcode(n, m, l, point)
 
 
 
@@ -106,15 +112,17 @@ input2: m, Number of equations you need which pass through point
 input3: l, Number of equations you need which doesn't have to pass through point
 input4: point, point through which equation should pass
 input5: upper, upper bound on the value of variable
+input6: bigm, big m value used in eqns
 
 output: Print the whole source code for LP problem
 """
 
-UPPER_BOUND_ON_VARS = 200
-NO_OF_VARS = 100
-NO_OF_CORRECT_EQNS = 101
-NO_OF_WRONG_EQNS = 51
+UPPER_BOUND_ON_VARS = 1
+NO_OF_VARS = 500
+NO_OF_CORRECT_EQNS = 501
+NO_OF_WRONG_EQNS = 499
+BIG_M = 1000
 
-POINT = [random.randint(0, UPPER_BOUND_ON_VARS) for _ in range(NO_OF_VARS)]
+POINT = [random.randint(0, 10000000)/10000000 for _ in range(NO_OF_VARS)]
 #POINT = [random.random() for _ in range(NO_OF_VARS)]
-hyperplanes(NO_OF_VARS, NO_OF_CORRECT_EQNS, NO_OF_WRONG_EQNS, POINT, UPPER_BOUND_ON_VARS)
+hyperplanes(NO_OF_VARS, NO_OF_CORRECT_EQNS, NO_OF_WRONG_EQNS, POINT, UPPER_BOUND_ON_VARS, BIG_M)
