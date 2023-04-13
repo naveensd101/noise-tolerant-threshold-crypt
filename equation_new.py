@@ -16,24 +16,24 @@ def precode(n, m, l, upper):
         print(f"z{i} = p.LpVariable(\"z{i}\", cat = p.LpBinary)")
     print()
     print("# Objective Function")
-    print("Lp_prob +=", end="")
+    print("Lp_prob += p.lpSum([", end="")
     for i in range(m+l-1):
-        print(f" z{i} +", end="")
-    print(f" z{m+l-1}")
+        print(f"z{i}, ", end="")
+    print(f"z{m+l-1}])")
     print()
 def postcode(n, m, l, point):
-    print("solver = p.PULP_CBC_CMD(threads=16, timeLimit=60)")
+    print("solver = p.MOSEK()")
     print("status = Lp_prob.solve(solver) # Solver")
     print("print(p.value(Lp_prob.objective))")
     print()
-    print("# Printing x values")
-    for i in range(n):
-        print(f"print(\"x{i} = \", p.value(x{i}))")
+    # print("# Printing x values")
+    # for i in range(n):
+    #     print(f"print(\"x{i} = \", p.value(x{i}))")
     print("# Finding the diff")
+    print("print(", end="")
     for i in range(n):
-        print("print(", end="")
-        print(f"p.value(x{i})", " - ", point[i], end="")
-        print(")")
+        print(f"p.value(x{i})", " + ", end="")
+    print(-sum(point), ")")
 def hyperplanes(n, m, l, point, upper, bigm):
     """
     input1: n, Number of variables in the equation
@@ -45,8 +45,8 @@ def hyperplanes(n, m, l, point, upper, bigm):
 
     output: Print the whole source code for LP problem
     """
-    for i in range(n):
-        print(f"x{i} = {point[i]}", file=sys.stderr)
+    # for i in range(n):
+    #     print(f"x{i} = {point[i]}", file=sys.stderr)
     precode(n, m, l, upper)
     correct_lines = []
     # For the m correct lines i will generate a list with n-1 random numbers
@@ -63,16 +63,16 @@ def hyperplanes(n, m, l, point, upper, bigm):
     # Print the correct lines
     print(f"# {m} correct equations passing through {point}")
     for i in range(m):
-        print("Lp_prob += ", end="")
+        print("Lp_prob += p.lpSum([", end="")
         for j in range(n):
-            print(f"{correct_lines[i][j]}*x{j} + ", end="")
-        print(f"{correct_lines[i][n]} >= -1*bigM*z{i}")
+            print(f"{correct_lines[i][j]}*x{j}, ", end="")
+        print(f"{correct_lines[i][n]}]) >= -1*bigM*z{i}")
     print("#------------------")
     for i in range(m):
-        print("Lp_prob += ", end="")
+        print("Lp_prob += p.lpSum([", end="")
         for j in range(n):
-            print(f"{correct_lines[i][j]}*x{j} + ", end="")
-        print(f"{correct_lines[i][n]} <= bigM*z{i}")
+            print(f"{correct_lines[i][j]}*x{j}, ", end="")
+        print(f"{correct_lines[i][n]}]) <= bigM*z{i}")
 
     wrong_lines = []
     for _ in range(l):
@@ -90,16 +90,16 @@ def hyperplanes(n, m, l, point, upper, bigm):
     # Print wrong lines
     print(f"# {l} wrong equations")
     for i in range(l):
-        print("Lp_prob += ", end="")
+        print("Lp_prob += p.lpSum([", end="")
         for j in range(n):
-            print(f"{wrong_lines[i][j]}*x{j} + ", end="")
-        print(f"{wrong_lines[i][n]} >= -1*bigM*z{i+m}")
+            print(f"{wrong_lines[i][j]}*x{j}, ", end="")
+        print(f"{wrong_lines[i][n]}]) >= -1*bigM*z{i+m}")
     print("#------------------")
     for i in range(l):
-        print("Lp_prob += ", end="")
+        print("Lp_prob += p.lpSum([", end="")
         for j in range(n):
-            print(f"{wrong_lines[i][j]}*x{j} + ", end="")
-        print(f"{wrong_lines[i][n]} <= bigM*z{i+m}")
+            print(f"{wrong_lines[i][j]}*x{j}, ", end="")
+        print(f"{wrong_lines[i][n]}]) <= bigM*z{i+m}")
     print("#------------------")
     print("#------------------")
     postcode(n, m, l, point)
@@ -118,11 +118,11 @@ output: Print the whole source code for LP problem
 """
 
 UPPER_BOUND_ON_VARS = 1
-NO_OF_VARS = 500
-NO_OF_CORRECT_EQNS = 501
-NO_OF_WRONG_EQNS = 499
-BIG_M = 1000
+NO_OF_VARS = 5000
+NO_OF_CORRECT_EQNS = 5001
+NO_OF_WRONG_EQNS = 4999
+BIG_M = 10000
 
-POINT = [random.randint(0, 10000000)/10000000 for _ in range(NO_OF_VARS)]
+POINT = [random.randint(0, 100000000)/100000000 for _ in range(NO_OF_VARS)]
 #POINT = [random.random() for _ in range(NO_OF_VARS)]
 hyperplanes(NO_OF_VARS, NO_OF_CORRECT_EQNS, NO_OF_WRONG_EQNS, POINT, UPPER_BOUND_ON_VARS, BIG_M)
