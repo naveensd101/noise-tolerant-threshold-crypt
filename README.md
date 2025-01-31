@@ -1,4 +1,4 @@
-# Anonymous Threshold Cryptography
+# Noise Tolerant Threshold Cryptography
 
 ## Prerequirements
  - A mosek license is required. Obtain a trial license [here](https://www.mosek.com/license/request/trial/)
