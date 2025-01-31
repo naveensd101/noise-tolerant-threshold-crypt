@@ -26,9 +26,6 @@ def postcode(n, m, l, point):
     print("status = Lp_prob.solve(solver) # Solver")
     print("print(p.value(Lp_prob.objective))")
     print()
-    # print("# Printing x values")
-    # for i in range(n):
-    #     print(f"print(\"x{i} = \", p.value(x{i}))")
     print("# Finding the diff")
     print("print(", end="")
     for i in range(n):
@@ -45,8 +42,6 @@ def hyperplanes(n, m, l, point, upper, bigm):
 
     output: Print the whole source code for LP problem
     """
-    # for i in range(n):
-    #     print(f"x{i} = {point[i]}", file=sys.stderr)
     precode(n, m, l, upper)
     correct_lines = []
     # For the m correct lines i will generate a list with n-1 random numbers
@@ -118,11 +113,10 @@ output: Print the whole source code for LP problem
 """
 
 UPPER_BOUND_ON_VARS = 1
-NO_OF_VARS = 1000
-NO_OF_CORRECT_EQNS = 1001
-NO_OF_WRONG_EQNS = 999
-BIG_M = 10000
+NO_OF_VARS = 10
+NO_OF_CORRECT_EQNS = 11
+NO_OF_WRONG_EQNS = 9
+BIG_M = 1000 * NO_OF_VARS
 
 POINT = [random.randint(0, 100000000)/100000000 for _ in range(NO_OF_VARS)]
-#POINT = [random.random() for _ in range(NO_OF_VARS)]
 hyperplanes(NO_OF_VARS, NO_OF_CORRECT_EQNS, NO_OF_WRONG_EQNS, POINT, UPPER_BOUND_ON_VARS, BIG_M)
