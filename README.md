@@ -1,16 +1,18 @@
 # Anonymous Threshold Cryptography
 
- - `equation_new.py` creates the source code for our lp problem
- - put the output into a file and run it as a python file
+## Prerequirements
+ - A mosek license is required. Obtain a trial license [here](https://www.mosek.com/license/request/trial/)
 
-# Work flow
+## How-to
 
-open `equation_new.py` change the values of `n`, `m`, `l`, `point`, `limit` as you like it
+ - `codegen.py` creates the source code for our lp problem and prints it to stdout.
+ - Pipe this output into a file and run it as a python file.
+ - Edit `codegen.py` to change the values of `n`, `m`, `l`, `point`, `limit` as required.
 
 ```
-python equation_new.py >big3.py
+python codegen.py > code.py
 ```
 
  ```
- python big3.py
+ python code.py
  ```
