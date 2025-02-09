@@ -22,7 +22,7 @@ def precode(n, m, l, upper):
     print(f"z{m+l-1}])")
     print()
 def postcode(n, m, l, point):
-    print("solver = p.MOSEK()")
+    print("solver = p.getSolver('PULP_CBC_CMD')")
     print("status = Lp_prob.solve(solver) # Solver")
     print("print(p.value(Lp_prob.objective))")
     print()
@@ -113,9 +113,9 @@ output: Print the whole source code for LP problem
 """
 
 UPPER_BOUND_ON_VARS = 1
-NO_OF_VARS = 10
-NO_OF_CORRECT_EQNS = 11
-NO_OF_WRONG_EQNS = 9
+NO_OF_VARS = 1000
+NO_OF_CORRECT_EQNS = 1001
+NO_OF_WRONG_EQNS = 999
 BIG_M = 1000 * NO_OF_VARS
 
 POINT = [random.randint(0, 100000000)/100000000 for _ in range(NO_OF_VARS)]
