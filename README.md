@@ -1,7 +1,7 @@
 # Noise Tolerant Threshold Cryptography
 
-## Prerequirements
- - A mosek license is required. Obtain a trial license [here](https://www.mosek.com/license/request/trial/)
+## Optional
+ - A mosek license can be obtained [here](https://www.mosek.com/license/request/trial/) to solve for larger values of `n` and `k`
 
 ## How-to
 
