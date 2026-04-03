@@ -28,8 +28,8 @@ for eq_no in range(NO_OF_CORRECT_EQ):
     Lp_prob += p.lpSum([x[i] * correct[eq_no][i] for i in range(NO_OF_VARS)] + [correct[eq_no][NO_OF_VARS]]) <= BIG_M * z[eq_no]
 
 for eq_no in range(NO_OF_WRONG_EQ):
-    Lp_prob += p.lpSum([x[i] * wrong[eq_no][i] for i in range(NO_OF_VARS)] + [wrong[eq_no][NO_OF_VARS]]) >= -1 * BIG_M * z[eq_no]
-    Lp_prob += p.lpSum([x[i] * wrong[eq_no][i] for i in range(NO_OF_VARS)] + [wrong[eq_no][NO_OF_VARS]]) <= BIG_M * z[eq_no]
+    Lp_prob += p.lpSum([x[i] * wrong[eq_no][i] for i in range(NO_OF_VARS)] + [wrong[eq_no][NO_OF_VARS]]) >= -1 * BIG_M * z[eq_no+NO_OF_CORRECT_EQ]
+    Lp_prob += p.lpSum([x[i] * wrong[eq_no][i] for i in range(NO_OF_VARS)] + [wrong[eq_no][NO_OF_VARS]]) <= BIG_M * z[eq_no+NO_OF_CORRECT_EQ]
 
 #------------------
 solver = p.MOSEK()
@@ -38,8 +38,9 @@ print(p.value(Lp_prob.objective))
 
 # Finding the diff
 
-# RES = [p.value(x[i]) for i in range(NO_OF_VARS)]
+RES = [(p.value(x[i])-POINT[i])*10e10 for i in range(NO_OF_VARS)]
 # print(POINT)
 # print(RES)
+# print([p.value(z[i]) for i in range(TOTAL_NO_OF_EQ)])
 # print(sum(POINT))
-# print(sum(RES))
+print(sum(RES))
