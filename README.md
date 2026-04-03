@@ -5,12 +5,12 @@
 
 ## How-to
 
- - `codegen.py` creates the source code for our lp problem and prints it to stdout.
- - Pipe this output into a file and run it as a python file.
- - Edit `codegen.py` to change the values of `n`, `m`, `l`, `point`, `limit` as required.
+ - `eqgen.py` generates equations to be solved by the lp solver in `eqn.txt`.
+ - Edit `eqgen.py` to change the values of `n`, `m`, `l`, `point`, `limit` as required.
+ - `code.py` will read `eqn.txt` and solve the lp.
 
 ```
-python codegen.py > code.py
+python eqgen.py
 ```
 
  ```
